@@ -15,12 +15,12 @@ multiply:
 	dec	ebx			; decrements ebx to avoid infinite loop
 	cmp	ebx, 0			; compare ebx to 0, to make conditional jump
 	jg	multiply		; jumps back to label 'multiply' if greater than 0
-	push 	ebp			; prologue
-	mov 	ebp, esp		; prologue
+	push 	ebp			; prologue : preserve the old base pointer in case any other code was using it
+	mov 	ebp, esp		; prologue : preserve the current top of the stack
 	push 	dword [result]		; %i value : 'result' is pushed first on to stack, due to LIFO
 	push 	msg			; then msg is pushed secondly to stack
 	call 	printf			; calls external function (printf) to print stack
-	mov 	eax, 0			; exit code for program
-	mov 	esp, ebp		; epilogue
-	pop 	ebp			; epilogue
-	ret				; epilogue
+	mov 	eax, 0			; return code for return instruction
+	mov 	esp, ebp		; epilogue : restoring the stack pointer from EBP 
+	pop 	ebp			; epilogue : remove value of EBP that was stored in prologue
+	ret				; epilogue : return instruction, pops off return address then jumps to address
