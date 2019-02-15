@@ -2,14 +2,14 @@ extern printf
 
 section .data
 	msg	db	"Result : %i", 0x0a, 0x00	; creates a variable with a message, integer holder, new line and a null terminator 
-	result	dd	0				; creates a variable in memory that wil contain result of multiplication	
+	result	dd	0				; creates a variable in memory that will contain result of multiplication	
 
 section .text
 
 global main
 main:
-	mov	eax, 5			; value 1 : uses general registery eax to contain value 5 
-	mov	ebx, 4			; value 2 : uses general registery ebx to contain value 4
+	mov	eax, 5			; value 1 : uses general registir eax to contain value 5 
+	mov	ebx, 4			; value 2 : uses general registir ebx to contain value 4
 multiply:	
 	add	[result], dword eax	; add value of eax to 'result'
 	dec	ebx			; decrements ebx to avoid infinite loop
